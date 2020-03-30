@@ -1,2 +1,3 @@
 ---
 # tasks file for prepare
+- include_tasks: prepare_droplet.yml

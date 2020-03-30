@@ -1,2 +1,7 @@
 ---
 # vars file for prepare
+
+install_software:
+  - python2.7
+  - python-pip
+  - python-apt

@@ -1,0 +1,34 @@
+--- # 
+
+- name: Wait for port 22 to become available.
+  local_action: "wait_for port=22 host={{ inventory_hostname }}"
+
+- name: Kill all apt process and unlock lock apt apt-get
+  raw: kill all apt apt-get
+  ignore_errors: yes
+
+- name: Remove /var/lib/apt/lists/lock
+  raw: rm /var/lib/apt/lists/lock
+  ignore_errors: yes
+
+- name: Remove /var/cache/apt/archives/lock
+  raw: rm /var/cache/apt/archives/lock
+  ignore_errors: yes
+
+- name: Remove/var/lib/dpkg/lock
+  raw: rm /var/lib/dpkg/lock
+  ignore_errors: yes
+
+- name: Reconfigure dpkg
+  raw: dpkg --configure -a
+  ignore_errors: yes
+
+- name: Update package
+  raw: apt-get update
+
+- name: Install needed package
+  raw: "apt-get install {{ item }} -y"
+  with_items: {{ install_software}}
+   
+  - name: Update pip
+    raw: pip install -U pip
