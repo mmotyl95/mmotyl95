@@ -19,4 +19,22 @@
         unique_names: yes
         wait: yes
         wait_timeout: 500
+      register: newvm
+    
+    - name: Adding a new host to our inventory
+      add_host:
+        name: "{{  newvm.droplet.ip_address }}"
+        group: newvm
+      when: newvm.droplet.ip_address is defined
+      changed_when: False
+
+- hosts: newvm
+  remote_user: root
+  gather_facts: False
+
+
+  roles:
+   - prepare  
+        
+        
 
