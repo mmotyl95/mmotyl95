@@ -1,0 +1,7 @@
+---
+#vars file for digitalocean
+__droplet_size: s-12-vpcu-48gb #s-1vcpu-1gb
+__droplet_image: ubuntu-18-04-x64
+__droplet_region: fra1
+__droplet_token: "yyyyyyyyyyyy"
+__droplet_ssh: "xxxxxx,xxxxxx"

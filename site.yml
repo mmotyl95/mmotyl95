@@ -1,0 +1,22 @@
+---
+- hosts: localhost
+  name: Start to prepare droplet for Linux course.
+  connection: local
+  gather_facts: False
+
+  tasks:
+    # This task create a droplet on digital ocean - look at host_vars
+    - name: Create a new droplet in DigitalOcean
+      digital_ocean: 
+        state: present
+        command: droplet
+        name: auto-ansible-droplet
+        size_id: "{{ __droplet_size }}"
+        image_id: "{{ __droplet_image }}"
+        region_id: "{{ __droplet_region }}"
+        ssh_key_ids: "{{ __droplet_ssh }}"
+        api_token: "{{ _droplet_token }}"
+        unique_names: yes
+        wait: yes
+        wait_timeout: 500
+

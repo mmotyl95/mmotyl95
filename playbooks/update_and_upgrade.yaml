@@ -1,5 +1,5 @@
 --- # Update and upgrade system
-
+https://go.microsoft.com/fwlink/?LinkID=760868
 - name: Update and upgrade
   hosts: Computers
   gather_facts: no
