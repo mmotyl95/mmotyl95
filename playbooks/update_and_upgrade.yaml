@@ -1,0 +1,17 @@
+--- # Update and upgrade system
+
+- name: Update and upgrade
+  hosts: Computers
+  gather_facts: no
+  tasks:
+          - name: Run the equivalent of "apt-get update" as a seperate step
+            apt: 
+              update_cache: yes
+          - name: Update all packages to the latest version
+            apt:
+              upgrade: dist
+          - name: Remove dependencies that are no longer required
+            apt:
+              autoremove: yes      
+
+         

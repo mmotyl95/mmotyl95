@@ -1,0 +1,28 @@
+---
+
+- name: Prepare all hosts for using Ansible scripts
+  hosts: Computers 
+  gather_facts: no
+  pre_tasks:
+         - name: Kill all apt processes and unlock lock apt apt-get
+           raw: killall apt apt-get
+           ignore_errors: yes
+         - name: Remove /var/lib/apt/lists/lock
+           raw: rm /var/liv/apt/lists/lock
+           ignore_errors: yes 
+         - name: Remove /var/cache/apt/archives/lock
+           raw: rm /var/cache/apt/archives/lock
+           ignore_errors: yes
+         - name: Remove /var/lib/dpkg/lock
+           raw: rm /var/lib/dpkg/lock
+           ignore_errors: yes
+         - name: Update package
+           raw: apt-get update
+           ignore_errors: yes
+         - name: Install needed packages
+           raw: "apt-get install {{item}} -y"
+           with_items:
+                   - python 2.7
+                   - python-pip
+         - name: Update pip
+           raw: pip install -U pip
